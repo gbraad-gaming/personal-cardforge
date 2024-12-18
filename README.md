@@ -25,3 +25,22 @@ $ tailscale ip
 
 ... and then open `https://[tailscale_ip]:8444`
 
+### Devcontainer
+
+A devcontainer is available for testing purposes. While it starts, the kasmvnc server
+can not be used on localhost. Preferably the following can be done
+
+As `root`
+```
+$ screen tailscaled     # (CtrlA+d)
+$ tailscale up
+```
+
+and then use another user:
+```
+$ su - gbraad
+$ kasmvncserver
+$ tailscale ip
+```
+
+... and then open `https://[tailscale_ip]:8444`
