@@ -11,7 +11,9 @@ Forge for personal/private use (rdesktop)
 ## Usage instructions
 
 ```shell
-$ podman run -d --name cardforge -p 8444:8444 \
+$ podman run -d --name cardforge \
+   --hostname ${HOSTNAME}-cardforge -p 8444:8444 \
+   -v ~/.cache/forge:/home/gbraad/.cache/forge \
    ghcr.io/gbraad-gaming/cardforge:latest
 $ podman exec -it cardforge su - gbraad
 $ kasmvncserver
