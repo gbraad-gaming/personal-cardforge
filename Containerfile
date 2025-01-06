@@ -15,6 +15,10 @@ RUN mkdir -p ~/Downloads ~/Applications/Cardforge \
     && rm -f forge-install.tar.bz2 \
     && echo "exec ~/Applications/Cardforge/forge.sh " >> ~/.config/i3/config
 
-USER root
 # ensure to become root for systemd
-#ENTRYPOINT ["/sbin/init"]
+USER root
+
+RUN systemctl enable tailscaled \
+    && systemctl enable kasmvncserver
+
+ENTRYPOINT ["/sbin/init"]
