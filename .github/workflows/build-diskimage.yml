@@ -1,5 +1,5 @@
-name: build diskimages (bootc)
-run-name: building diskimages (bootc)
+name: build diskimage (bootc)
+run-name: building diskimage (bootc)
 
 on:
   workflow_dispatch:
@@ -64,6 +64,9 @@ jobs:
           --rootfs ${{ env.ROOTFS }} \
           --local \
           ${{ env.IMAGE_NAME }}
+
+    - name: Split output result
+      run: sudo split -b 1800M --numeric-suffixes=0 --suffix-length=1 ./output/qcow2/disk.qcow2 ./output/qcow2/disk.qcow2_part
 
     - name: Create a GitHub release
       uses: ncipollo/release-action@v1
