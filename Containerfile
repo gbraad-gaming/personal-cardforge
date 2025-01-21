@@ -1,7 +1,7 @@
 ARG BASE_IMAGE="ghcr.io/gbraad-devenv/fedora/rdesktop"
 ARG BASE_VERSION=41
 
-FROM #{BASE_IMAGE}:${BASE_VERSION}
+FROM ${BASE_IMAGE}:${BASE_VERSION}
 
 USER root
 
@@ -21,8 +21,4 @@ RUN mkdir -p ~/Downloads ~/Applications/Cardforge \
 
 # ensure to become root for systemd
 USER root
-
-RUN systemctl enable tailscaled \
-    && systemctl enable kasmvncserver
-
-ENTRYPOINT ["/sbin/init"]
+#ENTRYPOINT ["/sbin/init"]
