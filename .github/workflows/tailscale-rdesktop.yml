@@ -9,7 +9,9 @@ jobs:
     steps:
       - name: Run system container with `podman`
         run: |
-          podman run -d --name cardforge ghcr.io/gbraad-gaming/cardforge:latest
+          podman run -d --name cardforge \
+            --cap-add=NET_ADMIN --cap-add=NET_RAW --device=/dev/net/tun \
+            ghcr.io/gbraad-gaming/cardforge:latest
       - name: Tailscale setup (root)
         run: |
           until podman exec cardforge tailscale up --auth-key ${TAILSCALE_AUTHKEY}

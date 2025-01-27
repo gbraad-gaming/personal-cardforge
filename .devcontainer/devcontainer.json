@@ -1,7 +1,7 @@
 {
     "name": "Cardforge remote desktop environment",
     "image": "ghcr.io/gbraad-gaming/cardforge:latest",
-    "runArgs": [ "--cap-add=NET_ADMIN", "--cap-add=NET_RAW", "--device=/dev/net/tun" ],
+    "runArgs": [ "--cap-add=NET_ADMIN", "--cap-add=NET_RAW", "--device=/dev/net/tun", "--device=/dev/fuse" ],
 
     "customizations": {
         "vscode": {

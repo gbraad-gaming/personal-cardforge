@@ -10,14 +10,16 @@ RUN dnf install -y \
     && dnf clean all \
     && rm -rf /var/cache/yum
 
+RUN mkdir -p /opt/cardforge \
+    && cd /tmp \
+    && wget https://github.com/Card-Forge/forge/releases/download/forge-2.0.00/forge-installer-2.0.00.tar.bz2 \
+        -O forge-install.tar.bz2 \
+    && tar -xjvf forge-install.tar.bz2 -C /opt/cardforge/ \
+    && rm -f forge-install.tar.bz2
+
 USER gbraad
 
-RUN mkdir -p ~/Downloads ~/Applications/Cardforge \
-    && cd ~/Downloads \
-    && wget https://github.com/Card-Forge/forge/releases/download/forge-2.0.00/forge-installer-2.0.00.tar.bz2 -O forge-install.tar.bz2 \
-    && tar -xjvf forge-install.tar.bz2 -C ~/Applications/Cardforge/ \
-    && rm -f forge-install.tar.bz2 \
-    && echo "exec ~/Applications/Cardforge/forge.sh " >> ~/.config/i3/config
+RUN echo "exec /opt/cardforge/forge.sh" >> $HOME/.config/i3/config
 
 # ensure to become root for systemd
 USER root
