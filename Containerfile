@@ -15,12 +15,8 @@ RUN mkdir -p /opt/cardforge \
     && wget https://github.com/Card-Forge/forge/releases/download/forge-2.0.00/forge-installer-2.0.00.tar.bz2 \
         -O forge-install.tar.bz2 \
     && tar -xjvf forge-install.tar.bz2 -C /opt/cardforge/ \
-    && rm -f forge-install.tar.bz2
+    && rm -f forge-install.tar.bz2 \
+    && git config -f /etc/rdesktop/rdesktop.ini rdesktop.title "Personal (Card)Forge" \
+    && git config -f /etc/rdesktop/rdesktop.ini rdesktop.exec "/opt/cardforge/forge.sh"
 
-USER gbraad
-
-RUN echo "exec /opt/cardforge/forge.sh" >> $HOME/.config/i3/config
-
-# ensure to become root for systemd
-USER root
 #ENTRYPOINT ["/sbin/init"]
