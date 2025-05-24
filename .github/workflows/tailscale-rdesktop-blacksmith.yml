@@ -1,0 +1,14 @@
+name: tailscale-rdesktop-blacksmith
+
+on:
+  workflow_dispatch:
+
+jobs:
+  rdesktop-test:
+    name: Tailscale SSH Machine - GitHub
+    uses: ./.github/workflows/reusable-tailscale-rdesktop.yml
+    with:
+      runs-on: "blacksmith-2vcpu-ubuntu-2404"
+      image: "ghcr.io/gbraad-gaming/cardforge:latest"
+      hostname: "gaming-cardforge"
+    secrets: inherit

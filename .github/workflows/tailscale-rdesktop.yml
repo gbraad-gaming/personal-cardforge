@@ -1,33 +1,14 @@
 name: tailscale-rdesktop
+
 on:
   workflow_dispatch:
 
 jobs:
   rdesktop-test:
-    runs-on: ubuntu-24.04
-    
-    steps:
-      - name: Run system container with `podman`
-        run: |
-          podman run -d --name cardforge \
-            --cap-add=NET_ADMIN --cap-add=NET_RAW --device=/dev/net/tun \
-            ghcr.io/gbraad-gaming/cardforge:latest
-      - name: Tailscale setup (root)
-        run: |
-          until podman exec cardforge tailscale up --auth-key ${TAILSCALE_AUTHKEY}
-          do
-              sleep 0.1
-          done
-          podman exec cardforge tailscale set --ssh
-          podman exec cardforge tailscale set --hostname github-${HOSTNAME}
-        env:
-          TAILSCALE_AUTHKEY: ${{ secrets.TAILSCALE_AUTHKEY}}
-      - name: Hang around
-        run: |
-          until podman exec cardforge systemctl is-active kasmvncserver
-          do
-               sleep 1
-          done
-          IP=`podman exec cardforge tailscale ip -4`
-          echo "Open in your web browser: https://${IP}:8444"
-          sleep infinity
+    name: Tailscale SSH Machine - GitHub
+    uses: ./.github/workflows/reusable-tailscale-rdesktop.yml
+    with:
+      runs-on: "ubuntu-latest"
+      image: "ghcr.io/gbraad-gaming/cardforge:latest"
+      hostname: "gaming-cardforge"
+    secrets: inherit
