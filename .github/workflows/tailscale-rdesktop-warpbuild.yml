@@ -1,4 +1,4 @@
-name: tailscale-rdesktop-blacksmith
+name: tailscale-rdesktop-warpbuild
 
 on:
   workflow_dispatch:
