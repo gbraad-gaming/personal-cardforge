@@ -5,7 +5,7 @@ on:
 
 jobs:
   rdesktop-test:
-    name: Tailscale SSH Machine - GitHub
+    name: Tailscale SSH Rdesktop - GitHub
     uses: ./.github/workflows/reusable-tailscale-rdesktop.yml
     with:
       runs-on: "ubuntu-latest"

@@ -5,10 +5,10 @@ on:
 
 jobs:
   rdesktop-test:
-    name: Tailscale SSH Rdesktop - Blacksmith
+    name: Tailscale SSH Rdesktop - WarpBuild
     uses: ./.github/workflows/reusable-tailscale-rdesktop.yml
     with:
-      runs-on: "blacksmith-2vcpu-ubuntu-2404"
+      runs-on: "warp-ubuntu-latest-x64-2x"
       image: "ghcr.io/gbraad-gaming/cardforge:latest"
       hostname: "gaming-cardforge"
     secrets: inherit
